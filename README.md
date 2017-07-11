@@ -20,7 +20,7 @@ bgperf is a performance measurement tool for BGP implementation.
 $ git clone https://github.com/osrg/bgperf
 $ cd bgperf
 $ pip install -r pip-requirements.txt
-$ ./bgperf.py --help
+$ sudo python3 bgperf.py --help
 usage: bgperf.py [-h] [-b BENCH_NAME] [-d DIR]
                  {doctor,prepare,update,bench,config} ...
 
@@ -38,8 +38,8 @@ optional arguments:
   -h, --help            show this help message and exit
   -b BENCH_NAME, --bench-name BENCH_NAME
   -d DIR, --dir DIR
-$ ./bgperf.py prepare
-$ ./bgperf.py doctor
+$ sudo python3 bgperf.py prepare
+$ sudo python3 bgperf.py doctor
 docker version ... ok (1.9.1)
 bgperf image ... ok
 gobgp image ... ok
@@ -54,7 +54,7 @@ By default, `bgperf` benchmarks [GoBGP](https://github.com/osrg/gobgp).
 `bgperf` boots 100 BGP test peers each advertises 100 routes to `GoBGP`.
 
 ```bash
-$ sudo ./bgperf.py bench
+$ sudo python3 bgperf.py bench
 run tester
 tester booting.. (100/100)
 run gobgp
@@ -67,13 +67,13 @@ Currently, `bgperf` supports [BIRD](http://bird.network.cz/) and [Quagga](http:/
 other than GoBGP.
 
 ```bash
-$ sudo ./bgperf.py bench -t bird
+$ sudo python3 bgperf.py bench -t bird
 run tester
 tester booting.. (100/100)
 run bird
 elapsed: 16sec, cpu: 0.00%, mem: 147.55MB
 elapsed time: 11sec
-$ sudo ./bgperf.py bench -t quagga
+$ sudo python3 bgperf.py bench -t quagga
 run tester
 tester booting.. (100/100)
 run quagga
@@ -91,7 +91,7 @@ To change a load, use following options.
 * `-x` : the number of ext-community-list filter (default 0)
 
 ```bash
-$ sudo ./bgperf.py bench -n 200 -p 50
+$ sudo python3 bgperf.py bench -n 200 -p 50
 run tester
 tester booting.. (200/200)
 run gobgp
@@ -99,4 +99,4 @@ elapsed: 23sec, cpu: 0.02%, mem: 1.26GB
 elapsed time: 18sec
 ```
 
-For a comprehensive list of options, run `sudo ./bgperf.py bench --help`.
+For a comprehensive list of options, run `sudo python3 bgperf.py bench --help`.
