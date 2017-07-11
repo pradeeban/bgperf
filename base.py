@@ -38,7 +38,7 @@ def img_exists(name):
 
 
 def rm_line():
-    print '\x1b[1A\x1b[2K\x1b[1D\x1b[1A'
+    print ('\x1b[1A\x1b[2K\x1b[1D\x1b[1A')
 
 
 class Container(object):
@@ -51,7 +51,7 @@ class Container(object):
         self.config_name = None
         if not os.path.exists(host_dir):
             os.makedirs(host_dir)
-            os.chmod(host_dir, 0777)
+            os.chmod(host_dir, 0o777)
 
     @classmethod
     def build_image(cls, force, tag, nocache=False):
@@ -73,10 +73,10 @@ class Container(object):
 
         f = io.BytesIO(cls.dockerfile.encode('utf-8'))
         if force or not img_exists(tag):
-            print 'build {0}...'.format(tag)
+            print ('build {0}...'.format(tag))
             for line in dckr.build(fileobj=f, rm=True, tag=tag, decode=True, nocache=nocache):
                 if 'stream' in line:
-                    print line['stream'].strip()
+                    print (line['stream'].strip())
 
     def get_ipv4_addresses(self):
         if 'local-address' in self.conf:
@@ -87,7 +87,7 @@ class Container(object):
     def run(self, dckr_net_name='', rm=True):
 
         if rm and ctn_exists(self.name):
-            print 'remove container:', self.name
+            print ('remove container:', self.name)
             dckr.remove_container(self.name, force=True)
 
         host_config = dckr.create_host_config(
@@ -138,7 +138,7 @@ class Container(object):
             break
 
         if net_id is None:
-            print 'Docker network "{}" not found!'.format(dckr_net_name)
+            print ('Docker network "{}" not found!'.format(dckr_net_name))
             return
 
         dckr.connect_container_to_network(self.ctn_id, net_id, ipv4_address=ipv4_addresses[0])
@@ -199,7 +199,7 @@ class Container(object):
         filename = '{0}/start.sh'.format(self.host_dir)
         with open(filename, 'w') as f:
             f.write(startup_content)
-        os.chmod(filename, 0777)
+        os.chmod(filename, 0o777)
 
         return self.local('{0}/start.sh'.format(self.guest_dir),
                           detach=detach,
@@ -266,6 +266,6 @@ class Tester(Container):
                     cnt += 1
                     if cnt > 1:
                         rm_line()
-                    print 'tester booting.. ({0}/{1})'.format(cnt, len(self.conf.get('neighbors', {}).values()))
+                    print ('tester booting.. ({0}/{1})'.format(cnt, len(self.conf.get('neighbors', {}).values())))
 
         return ctn

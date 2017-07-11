@@ -11,7 +11,7 @@ bgperf is a performance measurement tool for BGP implementation.
 
 ## Prerequisites
 
-* Python 2.7 or later
+* Python 3.5 or later
 * Docker
 
 ##  <a name="how_to_install">How to install
