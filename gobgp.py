@@ -61,7 +61,7 @@ class GoBGPTarget(GoBGP, Target):
                         'ext-community-sets': [],
                     },
             }
-            for k, v in scenario_global_conf['policy'].items():
+            for k, v in list(scenario_global_conf['policy'].items()):
                 conditions = {
                     'bgp-conditions': {},
                 }
@@ -113,7 +113,7 @@ class GoBGPTarget(GoBGP, Target):
                 c['apply-policy'] = {'config': a}
             return c
 
-        config['neighbors'] = [gen_neighbor_config(n) for n in list(flatten(t.get('neighbors', {}).values() for t in scenario_global_conf['testers'])) + [scenario_global_conf['monitor']]]
+        config['neighbors'] = [gen_neighbor_config(n) for n in list(flatten(list(t.get('neighbors', {}).values()) for t in scenario_global_conf['testers'])) + [scenario_global_conf['monitor']]]
         with open('{0}/{1}'.format(self.host_dir, self.CONFIG_FILE_NAME), 'w') as f:
             f.write(yaml.dump(config, default_flow_style=False))
 

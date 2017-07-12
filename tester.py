@@ -30,7 +30,7 @@ class ExaBGPTester(Tester, ExaBGP):
         super(ExaBGPTester, self).__init__(name, host_dir, conf, image)
 
     def configure_neighbors(self, target_conf):
-        peers = self.conf.get('neighbors', {}).values()
+        peers = list(self.conf.get('neighbors', {}).values())
 
         for p in peers:
             with open('{0}/{1}.conf'.format(self.host_dir, p['router-id']), 'w') as f:
@@ -53,7 +53,7 @@ class ExaBGPTester(Tester, ExaBGP):
         startup = ['''#!/bin/bash
 ulimit -n 65536''']
 
-        peers = self.conf.get('neighbors', {}).values()
+        peers = list(self.conf.get('neighbors', {}).values())
         for p in peers:
             startup.append('''env exabgp.log.destination={0}/{1}.log \
 exabgp.daemon.daemonize=true \

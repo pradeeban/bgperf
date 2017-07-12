@@ -51,7 +51,7 @@ class ExaBGPMrtTester(Tester, ExaBGP_MRTParse, MRTTester):
     def configure_neighbors(self, target_conf):
         tester_mrt_guest_file_path = self.get_mrt_file(self.conf, self.name)
 
-        neighbors = self.conf.get('neighbors', {}).values()
+        neighbors = list(self.conf.get('neighbors', {}).values())
 
         for neighbor in neighbors:
             config = '''neighbor {0} {{
@@ -99,7 +99,7 @@ class ExaBGPMrtTester(Tester, ExaBGP_MRTParse, MRTTester):
                 f.write(config)
 
     def get_startup_cmd(self):
-        peers = self.conf.get('neighbors', {}).values()
+        peers = list(self.conf.get('neighbors', {}).values())
 
         startup = ['#!/bin/bash',
                    'ulimit -n 65536']
@@ -142,7 +142,7 @@ class GoBGPMRTTester(Tester, GoBGP, MRTTester):
         super(GoBGPMRTTester, self).__init__(name, host_dir, conf, image)
 
     def configure_neighbors(self, target_conf):
-        conf = self.conf.get('neighbors', {}).values()[0]
+        conf = list(self.conf.get('neighbors', {}).values())[0]
 
         config = {
             'global': {
@@ -166,7 +166,7 @@ class GoBGPMRTTester(Tester, GoBGP, MRTTester):
             self.config_name = '{0}.conf'.format(self.name)
 
     def get_startup_cmd(self):
-        conf = self.conf.get('neighbors', {}).values()[0]
+        conf = list(self.conf.get('neighbors', {}).values())[0]
 
         mrtfile = self.get_mrt_file(conf, conf['router-id'])
         if not mrtfile:

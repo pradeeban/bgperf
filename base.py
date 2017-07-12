@@ -266,6 +266,6 @@ class Tester(Container):
                     cnt += 1
                     if cnt > 1:
                         rm_line()
-                    print ('tester booting.. ({0}/{1})'.format(cnt, len(self.conf.get('neighbors', {}).values())))
+                    print('tester booting.. ({0}/{1})'.format(cnt, len(list(self.conf.get('neighbors', {}).values()))))
 
         return ctn

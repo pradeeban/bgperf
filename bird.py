@@ -146,7 +146,7 @@ return true;
             f.write(config)
 
             if 'policy' in scenario_global_conf:
-                for k, v in scenario_global_conf['policy'].items():
+               for k, v in list(scenario_global_conf['policy'].items()):
                     match_info = []
                     for i, match in enumerate(v['match']):
                         n = '{0}_match_{1}'.format(k, i)
