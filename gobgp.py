@@ -61,7 +61,7 @@ class GoBGPTarget(GoBGP, Target):
                         'ext-community-sets': [],
                     },
             }
-            for k, v in scenario_global_conf['policy'].iteritems():
+            for k, v in scenario_global_conf['policy'].items():
                 conditions = {
                     'bgp-conditions': {},
                 }

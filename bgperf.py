@@ -38,7 +38,7 @@ from mrt_tester import GoBGPMRTTester, ExaBGPMrtTester
 from monitor import Monitor
 from settings import dckr
 
-import queue
+from queue import Queue
 # Comment out the above line and uncomment the below for Python2.
 #from Queue import Queue
 
@@ -230,7 +230,7 @@ def bench(args):
                                      intf_name, raw_bridge_name
                                     ))
                 try:
-                    answer = raw_input()
+                    answer = input()
                 except:
                     print ('aborting')
                     sys.exit(1)

@@ -149,9 +149,9 @@ class Container(object):
             # get the interface used by the first IP address already added by Docker
             dev = None
             res = self.local('ip addr')
-            for line in res.split('\n'):
-                if ipv4_addresses[0] in line:
-                    dev = line.split(' ')[-1].strip()
+            for line in res.split(b'\n'):
+                if ipv4_addresses[0].encode('utf-8') in line:
+                    dev = line.split(b' ')[-1].strip()
             if not dev:
                 dev = "eth0"
 
@@ -241,7 +241,7 @@ class Tester(Container):
 
     def get_ipv4_addresses(self):
         res = []
-        peers = self.conf.get('neighbors', {}).values()
+        peers = list(self.conf.get('neighbors', {}).values())
         for p in peers:
             res.append(p['local-address'])
         return res
@@ -259,8 +259,8 @@ class Tester(Container):
         cnt = 0
         prev_pid = 0
         for lines in output:
-            for line in lines.strip().split('\n'):
-                pid = int(line.split('|')[2])
+            for line in lines.strip().split(b'\n'):
+                pid = int((line.split(b'|')[1]).decode("utf-8"))
                 if pid != prev_pid:
                     prev_pid = pid
                     cnt += 1
