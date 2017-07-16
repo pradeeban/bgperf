@@ -17,7 +17,7 @@ bgperf is a performance measurement tool for BGP implementation.
 ##  <a name="how_to_install">How to install
 
 ```bash
-$ git clone https://github.com/osrg/bgperf
+$ git clone https://github.com/pradeeban/bgperf
 $ cd bgperf
 $ pip install -r pip-requirements.txt
 $ sudo python3 bgperf.py --help
@@ -50,7 +50,7 @@ quagga image ... ok
 ## <a name="how_to_use">How to use
 
 Use `bench` command to start benchmark test.
-By default, `bgperf` benchmarks [GoBGP](https://github.com/osrg/gobgp).
+By default, `bgperf` benchmarks [GoBGP](https://github.com/pradeeban/gobgp).
 `bgperf` boots 100 BGP test peers each advertises 100 routes to `GoBGP`.
 
 ```bash
